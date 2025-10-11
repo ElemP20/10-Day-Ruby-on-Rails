@@ -17,10 +17,30 @@ class Game
   def play_turn
     puts "#{@current_player.name}'s turn (#{@current_player.symbol})."
     move = @current_player.make_move
+
     if @board.update(move[0], move[1], @current_player.symbol)
       @board.display
+      
+      if check_winner
+        puts "#{@current_player.name} wins!"
+        exit
+      end
+
       switch_player
     end
+
+    if @board.full?
+      puts "It's a draw!"
+      exit
+    elsif check_winner
+      puts "#{@current_player.name} wins!"
+      exit
+    end
+
+  end
+
+  def check_winner
+    @board.check_winner(@current_player.symbol)
   end
 
   def play
