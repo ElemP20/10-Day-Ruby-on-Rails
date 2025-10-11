@@ -25,4 +25,24 @@ class Board
       false
     end
   end
+
+  def full?
+    @grid.all? { |row| row.all? { |cell| cell != " " } }
+  end
+
+  def check_winner(symbol)
+    # Check rows and columns
+    3.times do |i|
+      if @grid[i].all? { |cell| cell == symbol } || @grid.all? { |row| row[i] == symbol }
+        return true
+      end
+    end
+
+    # Check diagonals
+    if (0..2).all? { |i| @grid[i][i] == symbol } || (0..2).all? { |i| @grid[i][2 - i] == symbol }
+      return true
+    end
+
+    false
+  end
 end
