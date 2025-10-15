@@ -64,3 +64,8 @@ end
 
 # Load environment variables from .env for development and test environments
 gem 'dotenv-rails', groups: [:development, :test]
+gem "cssbundling-rails", "~> 1.4"
+
+gem "tailwindcss-ruby", "~> 4.1"
+
+gem "tailwindcss-rails", "~> 4.3"

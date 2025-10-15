@@ -29,6 +29,10 @@
       <%= link_to "Log in", new_session_path unless authenticated? %>
     </nav>
     <main>
+      <div class="p-6 bg-green-500 text-white text-center">
+        Tailwind is working!
+      </div>
+
       <%= yield %>
     </main>
   </body>
