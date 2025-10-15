@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
-before_action :set_product, only: %i[show edit update destroy]
+  allow_unauthenticated_access only: %i[ index show ]
+  before_action :set_product, only: %i[show edit update destroy]
 
   def index
     @products = Product.all
@@ -43,6 +44,6 @@ before_action :set_product, only: %i[show edit update destroy]
     end
 
     def product_params
-      params.expect(product: [ :name ])
+      params.expect(product: [ :name, :description, :featured_image, :inventory_count ]).require(:product)
     end
 end
