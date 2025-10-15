@@ -1,4 +1,12 @@
-<div>
-  <h1 class="font-bold text-4xl">Posts#index</h1>
-  <p>Find me in app/views/posts/index.html.erb</p>
+<div class="max-w-3xl mx-auto py-10">
+  <h1 class="text-3xl font-bold mb-6 text-center">Blog</h1>
+
+  <%= link_to "New Post", new_post_path, class: "bg-blue-600 text-white px-4 py-2 rounded-md mb-6 inline-block" %>
+
+  <% @posts.each do |post| %>
+    <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+      <h2 class="text-xl font-semibold"><%= link_to post.title, post %></h2>
+      <p class="text-gray-700 mt-2"><%= truncate(post.content, length: 120) %></p>
+    </div>
+  <% end %>
 </div>
