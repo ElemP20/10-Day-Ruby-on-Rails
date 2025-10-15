@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "home/index"
   get "classes/economy"
   get "classes/business"
   get "classes/first_class"
