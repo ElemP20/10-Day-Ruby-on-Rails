@@ -1,4 +1,28 @@
-<div>
-  <h1 class="font-bold text-4xl">Users#new</h1>
-  <p>Find me in app/views/users/new.html.erb</p>
+<div class="max-w-md mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-2xl font-bold mb-4">Signup</h2>
+
+  <%= form_with model: @user, local: true do |f| %>
+    <div class="mb-4">
+      <%= f.label :email, class: "block text-sm font-medium" %>
+      <%= f.email_field :email, class: "border rounded w-full p-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :password, class: "block text-sm font-medium" %>
+      <%= f.password_field :password, class: "border rounded w-full p-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :password_confirmation, class: "block text-sm font-medium" %>
+      <%= f.password_field :password_confirmation, class: "border rounded w-full p-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :role, "Class", class: "block text-sm font-medium" %>
+      <%= f.select :role, User.roles.keys.map {|r| [r.titleize, r]}, {}, class: "border rounded w-full p-2" %>
+    </div>
+
+    <%= f.submit "Signup", class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+  <% end %>
 </div>
+

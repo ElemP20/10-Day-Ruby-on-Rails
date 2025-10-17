@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Airlines" %></title>
+    <title><%= content_for(:title) || "Airline Customer Class Management" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
@@ -21,10 +21,44 @@
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
+  
+  <body class="min-h-screen bg-gray-100">
+    <nav class="bg-white shadow-md">
+      <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+        <div>
+          <%= link_to "Home", root_path, class: "text-lg font-semibold" %>
+        </div>
+        <div class="space-x-4">
+          <% if logged_in? %>
+            <%# Only show the class page that matches the current user role %>
+            <% case current_user.role.to_s %>
+              <% when 'economy' %>
+                <%= link_to "Economy Lounge", economy_path, class: "hover:text-blue-600" %>
+              <% when 'business' %>
+                <%= link_to "Business Lounge", business_path, class: "hover:text-blue-600" %>
+              <% when 'first_class' %>
+                <%= link_to "First Class Lounge", first_class_path, class: "hover:text-blue-600" %>
+            <% end %>
+            <span class="text-gray-700">Logged in as <%= current_user.email %> (<%= current_user.role %>)</span>
+            
+            <%= link_to "Logout", logout_path, data: { turbo_method: :delete }, class: "ml-4 text-red-500" %>
+          <% else %>
+            <%= link_to "Login", login_path, class: "hover:text-blue-600" %>
+            <%= link_to "Signup", signup_path, class: "hover:text-blue-600 ml-2" %>
+          <% end %>
+        </div>
+      </div>
+    </nav>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <div class="max-w-4xl mx-auto px-4 mt-6">
+      <% flash.each do |type, message| %>
+        <div class="p-3 mb-4 rounded 
+            <%= type == 'notice' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' %>">
+          <%= message %>
+        </div>
+      <% end %>
+
       <%= yield %>
-    </main>
+    </div>
   </body>
 </html>

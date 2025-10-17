@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
-  get "home/index"
-  get "classes/economy"
-  get "classes/business"
-  get "classes/first_class"
-  get "sessions/new"
-  get "sessions/create"
-  get "sessions/destroy"
-  get "users/new"
-  get "users/create"
+  # get "home/index"
+  # get "classes/economy"
+  # get "classes/business"
+  # get "classes/first_class"
+  # get "sessions/new"
+  # get "sessions/create"
+  # get "sessions/destroy"
+  # get "users/new"
+  # get "users/create"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   # Flight class pages
+  # protect via controller before_action
   get "/economy", to: "classes#economy"
   get "/business", to: "classes#business"
   get "/first_class", to: "classes#first_class"
